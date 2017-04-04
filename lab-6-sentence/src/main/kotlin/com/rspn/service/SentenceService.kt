@@ -8,21 +8,22 @@ open class SentenceService {
     @Autowired
     private lateinit var nounClient: NounClient
     @Autowired
-    private lateinit var verbService: WordService
+    private lateinit var verbClient: VerbClient
     @Autowired
-    private lateinit var adjectiveService: WordService
+    private lateinit var adjectiveClient: AdjectiveClient
     @Autowired
-    private lateinit var articleService: WordService
+    private lateinit var articleClient: ArticleClient
     @Autowired
-    private lateinit var subjectService: WordService
+    private lateinit var subjectClient: SubjectClient
 
 
     fun createSentence(): String {
         val builder = StringBuilder()
-        listOf(subjectService, verbService, articleService, adjectiveService).forEach {
-            builder.append(it.word.word).append(" ")
-        }
-        builder.append(nounClient.getRandomWord().word)
+        builder.append(subjectClient.getRandomWord().word).append(" ")
+                .append(verbClient.getRandomWord().word).append(" ")
+                .append(articleClient.getRandomWord().word).append(" ")
+                .append(nounClient.getRandomWord().word).append(" ")
+                .append(adjectiveClient.getRandomWord().word)
 
         return builder.append(".").toString()
     }
